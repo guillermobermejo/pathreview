@@ -86,3 +86,34 @@ Before the change, `make check` stopped during linting with 183 errors. After th
   Found 182 errors.
   [*] 86 fixable with the `--fix` option (42 hidden fixes can be enabled with the `--unsafe-fixes` option).
   make: *** [lint] Error 1
+
+  ## Week 10 — Iteration & reflection
+
+### Reviewer feedback
+
+**Feedback received:** [ ] Yes  [x] No — still awaiting review
+
+**Summary of feedback:**
+No review came in.
+
+**How you responded:**
+N/A
+
+---
+
+### Reflection
+
+**What was harder than you expected?**
+Setting up and validating the project was harder than implementing the actual fix. I had to install the correct Python version, recreate the virtual environment, install Node.js and npm, start the PostgreSQL and Redis containers, and make sure the database port matched the value in `.env`. I was also surprised by the number of pre-existing unit-test, lint, and type-checking failures. This required me to record baseline results and compare them with the results after my change instead of simply expecting every check to pass.
+
+**What did you learn about working in a large codebase?**
+I learned that contributing to an existing codebase requires understanding the intended behavior before changing anything. Although the failure occurred in a README scorer test, the production scorer was behaving correctly; the actual problem was that the test fixture did not meet the scorer’s comprehensive word-count threshold. In my own projects, I might change related code whenever I notice an inconsistency, but in a shared codebase it is important to keep the change focused on the selected issue, follow the project’s conventions, document unrelated failures, and avoid expanding the scope unnecessarily.
+
+**How did AI tools help — and where did they fall short?**
+AI tools were most useful for interpreting terminal errors, explaining Git and virtual-environment commands, navigating unfamiliar project structure, and comparing the test assertions with the scorer implementation. They also helped me organize my reproduction notes, solution plan, journal entries, and pull-request description. However, I still needed to inspect both files myself, run the tests locally, and verify the recommendations against the actual code. AI could suggest likely causes and commands, but it could not replace observing the exact test output, confirming the 500-word threshold, or distinguishing pre-existing failures from failures introduced by my change.
+
+**What would you do differently if you started over?**
+I would read the complete setup and contribution documentation before running the initial setup, verify all required tools and versions first, and record the baseline results from `make check` and `make test-unit` before modifying any files. I would also inspect the failing test and its production implementation together before writing the solution plan. That would let me identify earlier that this was a small test-fixture problem and avoid uncertainty about whether the scorer itself needed to change.
+
+**What are you most proud of from this module?**
+I am most proud that I completed the full contribution workflow instead of only making the code pass. I reproduced the failure, found its actual root cause, created a focused plan, implemented a minimal fix, compared the full test and lint results before and after the change, followed the repository’s branch and commit conventions, and submitted a documented pull request without trying to fix unrelated problems.
